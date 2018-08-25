@@ -1,6 +1,7 @@
 package cn.coldwarm7.sell.service;
 
 import cn.coldwarm7.sell.dataObject.ProductInfo;
+import cn.coldwarm7.sell.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -25,6 +26,8 @@ public interface ProductService {
     ProductInfo save(ProductInfo productInfo);
 
     //加库存
+    void increaseStock(List<CartDTO> cartDTOList) ;
 
     //减库存
+    void decreaseStock(List<CartDTO> cartDTOList);
 }
