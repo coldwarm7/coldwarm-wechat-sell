@@ -3,11 +3,14 @@ package cn.coldwarm7.sell.service.impl;
 import cn.coldwarm7.sell.dataObject.OrderDetail;
 import cn.coldwarm7.sell.dto.OrderDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.criterion.Order;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 import sun.util.calendar.LocalGregorianCalendar;
 
@@ -26,8 +29,12 @@ import static org.junit.Assert.*;
 public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "110110";
+
+    private final String ORDER_ID = "1535201720573558627";
+
     @Autowired
     private OrderServiceImpl orderService;
+
     @Test
     public void create() {
 
@@ -53,10 +60,18 @@ public class OrderServiceImplTest {
 
     @Test
     public void findOne() {
+
+        OrderDTO result =  orderService.findOne(ORDER_ID);
+        log.info("【查询个人订单】 + result" + result);
+        Assert.assertEquals(ORDER_ID,result.getOrderId());
     }
 
     @Test
     public void findList() {
+        PageRequest request = new PageRequest(0,2);
+
+        Page<OrderDTO> orderDTOPage = orderService.findList(BUYER_OPENID,request);
+        Assert.assertNotEquals(0,orderDTOPage.getTotalElements());
     }
 
     @Test
