@@ -6,6 +6,7 @@ import cn.coldwarm7.sell.enums.PayStatusEnum;
 import cn.coldwarm7.sell.util.EnumUtil;
 import cn.coldwarm7.sell.util.serializer.Date2LongSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * Create by coldwarm on 2018/8/25.
  */
 @Data
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class OrderDTO {
     /** 订单id. */
     private String orderId;

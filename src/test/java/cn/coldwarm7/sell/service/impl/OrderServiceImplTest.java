@@ -2,6 +2,8 @@ package cn.coldwarm7.sell.service.impl;
 
 import cn.coldwarm7.sell.dataObject.OrderDetail;
 import cn.coldwarm7.sell.dto.OrderDTO;
+import cn.coldwarm7.sell.enums.OrderStatusEnum;
+import cn.coldwarm7.sell.enums.PayStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.criterion.Order;
 import org.junit.Assert;
@@ -76,14 +78,23 @@ public class OrderServiceImplTest {
 
     @Test
     public void cancel() {
+        OrderDTO orderDTO =  orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),result.getOrderStatus());
     }
 
     @Test
     public void finish() {
+        OrderDTO orderDTO =  orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),result.getOrderStatus());
     }
 
     @Test
     public void paid() {
+        OrderDTO orderDTO =  orderService.findOne(ORDER_ID);
+        OrderDTO result = orderService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),result.getPayStatus());
     }
 
     @Test
